@@ -1,26 +1,22 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-
 class Solution {
-    static int  count = 0;
-    static List<Integer> list = new ArrayList<>();
+    public static boolean check[];
+    public static int ans = 0;
 
     public int solution(int k, int[][] dungeons) {
-        boolean[] visited = new boolean[dungeons.length];
-        dfs(dungeons,k, 0, visited, 0, dungeons.length, 0);
-        list.sort(Comparator.reverseOrder());
-        return list.get(0);
-    }
+        check = new boolean[dungeons.length];
 
-    public void dfs(int[][] dungeons, int k,int i,boolean[] visited, int depth,int r, int count) {
-        for(int j = 0; j < dungeons.length; j++) {
-            if(!visited[j] && k >= dungeons[j][0]) {
-                visited[j] = true;
-                dfs(dungeons, k - dungeons[j][1], j, visited, depth+1, dungeons.length, count+1);
-                visited[j] = false;
+        dfs(k, dungeons, 0);
+
+        return ans;
+    }
+    public static void dfs(int tired, int[][] dungeons, int cnt){
+        for(int i=0; i<dungeons.length; i++){
+            if(!check[i] && dungeons[i][0]<=tired){
+                check[i] = true;
+                dfs(tired-dungeons[i][1], dungeons, cnt+1);
+                check[i] = false;
             }
         }
-        list.add(count);
+        ans = Math.max(ans, cnt);
     }
 }
