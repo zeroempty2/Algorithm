@@ -3,11 +3,11 @@ class Solution {
     int emoticonPlus = 0;
     int sale = 0;
     public int[] solution(int[][] users, int[] emoticons) {
-        dfs(emoticons, users, 0, new int[emoticons.length]);
+        cal(emoticons, users, 0, new int[emoticons.length]);
         return new int[]{emoticonPlus, sale};
     }
 
-    void dfs(int[] emoticons, int[][] users, int cnt, int[] rates){
+    void cal(int[] emoticons, int[][] users, int cnt, int[] rates){
         if(cnt == emoticons.length){
             int thisPlus = 0;
             int total = 0;
@@ -40,7 +40,7 @@ class Solution {
 
         for (int r : rate) {
             rates[cnt] = r;
-            dfs(emoticons, users, cnt + 1, rates);
+            cal(emoticons, users, cnt + 1, rates);
         }
 
     }
