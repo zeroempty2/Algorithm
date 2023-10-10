@@ -27,9 +27,6 @@ class Solution {
         return answer;
     }
     public void mine(int[] picks, String[] minerals, int mineralIndex, int pickIndex, int tired, int count){
-        if (mineralIndex >= minerals.length) {
-            return;
-        } 
         int spend = 0;
 
         for (int i = mineralIndex; i < mineralIndex + 5; i++) {
