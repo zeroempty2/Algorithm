@@ -6,6 +6,6 @@ class Solution {
             if(temp.equals("p") || temp.equals("P")) p++;
             if(temp.equals("y") || temp.equals("Y")) y++;
         }
-        return p == y ? true : false;
+        return p == y;
     }
 }
