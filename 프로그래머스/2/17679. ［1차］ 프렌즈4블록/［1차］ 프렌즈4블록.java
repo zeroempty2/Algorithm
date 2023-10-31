@@ -1,5 +1,4 @@
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Stack;
 
 class Solution {
@@ -8,7 +7,6 @@ class Solution {
     public int solution(int m, int n, String[] board) {
         int answer = 0;
         arr = new char[m][n];
-        Queue<String> q = new LinkedList<>();
         for(int i = 0; i < board.length; i++) {
             arr[i] = board[i].toCharArray();
             st.add(board[i]);
