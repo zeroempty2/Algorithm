@@ -22,35 +22,21 @@ public static void main(String[] args) throws IOException{
     }
 
 }
-static boolean isPossible(int i){
-    for (int avg : averages) {
-        int left = 0;
-        int right = 10 * i;
-        boolean isPossible = false;
-        while (left <= right) {
-            int sumOfScore = (left + right) / 2;
-            int currentAvg = (sumOfScore * 1000) / i;
 
-            if (currentAvg == avg) {
-                if (currentAvg > 10 * 1000) continue;
-                isPossible = true;
-                break;
-            } 
-            else if (currentAvg > avg) right = (sumOfScore - 1);
-            else left = (sumOfScore + 1);   
-        }
-        if (!isPossible) return false;  
-    }
+static boolean isPossible(int i){
+    for (int avg : averages) if (!binarySearch(0, 10 * i, i, avg)) return false;
     return true;
 }
-// static boolean binarySearch(int left, int right, int i, int avg){
-//     if(left > right){
-//         return false;
-//     }
-//     int mid = (left + right) / 2;
-//     int currentAvg = (mid * 1000) / i;
-//     if(currentAvg == avg && currentAvg < 10 * 1000) return true;
-//     else if (currentAvg > avg) return binarySearch(left, mid - 1, i, avg);
-//     else return binarySearch(mid + 1, right, i, avg); 
-// }
+
+static boolean binarySearch(int left, int right, int i, int avg){
+    if(left > right) return false;
+
+    int mid = (left + right) / 2;
+    int currentAvg = (mid * 1000) / i;
+    
+    if(currentAvg == avg) return currentAvg > 10 * 1000 ? false : true;
+    else if (currentAvg > avg) return binarySearch(left, mid - 1, i, avg);
+    else return binarySearch(mid + 1, right, i, avg); 
+}
+
 }
