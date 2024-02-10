@@ -1,69 +1,57 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
 	static int v, e;
-	static ArrayList<Integer>[] al;
-	static int visit[];
-
+	static ArrayList<Integer>[] arr;
+	static int visited[];
+	static boolean visit[];
+	static int check[];
+	static boolean isTrue;
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer stz = new StringTokenizer(br.readLine());
-		int t = Integer.parseInt(stz.nextToken());
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int n = Integer.parseInt(st.nextToken());
 
-		for(int tc = 0; tc < t; tc++) {
-			stz = new StringTokenizer(br.readLine());
-			v = Integer.parseInt(stz.nextToken());
-			e = Integer.parseInt(stz.nextToken());
-			visit = new int[v+1];
-			al = new ArrayList[v+1];
+		for(int i = 0; i < n; i++) {
+			st = new StringTokenizer(br.readLine());
+			v = Integer.parseInt(st.nextToken());
+			e = Integer.parseInt(st.nextToken());
+			visited = new int[v + 1];
+			arr = new ArrayList[v + 1];
+			visit = new boolean[v + 1];
+			check = new int[v + 1];
+			isTrue = true;
+			for(int j = 0; j < v + 1; j++) arr[j] = new ArrayList<Integer>();
 
-			for(int i = 0; i <= v; i++)
-				al[i] = new ArrayList<Integer>();
+			for(int k = 0; k < e; k++) {
+				st = new StringTokenizer(br.readLine());
+				int start = Integer.parseInt(st.nextToken());
+				int end = Integer.parseInt(st.nextToken());
 
-			for(int i = 0; i < e; i++) {
-				stz = new StringTokenizer(br.readLine());
-				int p1 = Integer.parseInt(stz.nextToken());
-				int p2 = Integer.parseInt(stz.nextToken());
-
-				al[p1].add(p2);
-				al[p2].add(p1);
+				arr[start].add(end);
+				arr[end].add(start);
 			}
-			grouping();
+			for(int t = 1; t < v + 1; t++){
+				if(isTrue) dfs(t);
+				else break;
+			}
+			System.out.println(isTrue ? "YES" : "NO");
 		}
 	}
 
-	public static void grouping() {
-		Queue<Integer> q = new LinkedList<Integer>();
-
-		for(int i = 1; i <= v; i++) {
-			if(visit[i] == 0) {
-				q.add(i);
-				visit[i] = 1;
+	public static void dfs(int node){
+		visit[node] = true;
+		for(int i : arr[node]){
+			if(!visit[i]){
+				check[i] = (check[node] + 1) % 2;
+				dfs(i);
 			}
-
-			while(!q.isEmpty()) {
-				int now = q.poll();
-
-				for(int j = 0; j < al[now].size(); j++) {
-					if(visit[al[now].get(j)] == 0) {
-						q.add(al[now].get(j));
-					}
-					
-					if(visit[al[now].get(j)] == visit[now]) {
-						System.out.println("NO");
-						return;
-					}
-
-					if(visit[now] == 1 && visit[al[now].get(j)] == 0)
-						visit[al[now].get(j)] = 2;
-					else if(visit[now] == 2 && visit[al[now].get(j)] == 0)
-						visit[al[now].get(j)] = 1;
-				}
+			else if(check[node] == check[i]){
+				isTrue = false;
 			}
 		}
-
-		System.out.println("YES");
+		
 	}
-
 }
