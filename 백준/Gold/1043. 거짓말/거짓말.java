@@ -40,7 +40,7 @@ public static void main(String[] args) throws IOException{
         int cur = partyInfo[i].members[0];
         boolean isPossible = true;
         for(int j = 0; j < know.length; j++){
-            if(check(cur, know[j])){
+            if(find(cur) == find(know[j])){
                 isPossible = false;
                 break;
             } 
@@ -68,10 +68,6 @@ static int find(int a){
     if(a == peoples[a]) return a;
     else return peoples[a] = find(peoples[a]);
 }
-static boolean check(int a, int b){
-    a = find(a);
-    b = find(b);
-    return a == b;
-}
+
 
 }
