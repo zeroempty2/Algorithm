@@ -11,6 +11,4 @@ def solution(s):
         else:
             stack.append(arr[i])
     
-    answer = True if len(stack) == 0 else False
-    
-    return answer
+    return len(stack) == 0
