@@ -1,6 +1,6 @@
 # [level 2] 하노이의 탑 - 12946 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12946?language=python3) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12946) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 11월 09일 18:25:48
+2024년 11월 09일 18:26:39
 
 ### 문제 설명
 
