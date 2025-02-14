@@ -1,9 +1,11 @@
-SELECT id, name, host_id
-FROM places
-WHERE host_id IN (
-    SELECT host_id
-    FROM places
-    GROUP BY host_id
+SELECT 
+    ID, NAME, HOST_ID
+FROM 
+    PLACES
+WHERE HOST_ID IN (
+    SELECT HOST_ID
+    FROM PLACES
+    GROUP BY HOST_ID
     HAVING COUNT(*) > 1
 )
-ORDER BY id;
+ORDER BY ID;
