@@ -6,9 +6,13 @@ SELECT
               SUBSTR(u2.tlno, 1, 3), 
               SUBSTR(u2.tlno, 4, LENGTH(u2.tlno) - 7), 
               SUBSTR(u2.tlno, -4, 4)) 전화번호
-FROM used_goods_board u1
-JOIN used_goods_user u2
-ON u1.writer_id = u2.user_id
-GROUP BY u2.user_id
-HAVING count(u1.writer_id) >= 3
-ORDER BY u2.user_id desc;
+FROM 
+    used_goods_board u1
+JOIN 
+    used_goods_user u2 ON u1.writer_id = u2.user_id
+GROUP BY 
+    u2.user_id
+HAVING 
+    count(u1.writer_id) >= 3
+ORDER BY 
+    u2.user_id desc;
