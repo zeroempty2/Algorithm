@@ -3,34 +3,45 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        int T = sc.nextInt();  
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
 
-        for (int t = 0; t < T; t++) {
-            int x1 = sc.nextInt();
-            int y1 = sc.nextInt();
-            int r1 = sc.nextInt();
-            int x2 = sc.nextInt();
-            int y2 = sc.nextInt();
-            int r2 = sc.nextInt();
+        StringBuilder sb = new StringBuilder();
 
-            int dx = x2 - x1;
-            int dy = y2 - y1;
-            int d2 = dx * dx + dy * dy; 
-            int sumR = r1 + r2;
-            int diffR = Math.abs(r1 - r2);
-            int sumR2 = sumR * sumR;
-            int diffR2 = diffR * diffR;
+        while (T-- > 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int x1 = Integer.parseInt(st.nextToken());
+            int y1 = Integer.parseInt(st.nextToken());
+            int r1 = Integer.parseInt(st.nextToken());
+            int x2 = Integer.parseInt(st.nextToken());
+            int y2 = Integer.parseInt(st.nextToken());
+            int r2 = Integer.parseInt(st.nextToken());
 
+            long dx = x2 - x1;
+            long dy = y2 - y1;
+            long d2 = dx*dx + dy*dy; 
+            long sumR = r1 + r2;
+            long diffR = Math.abs(r1 - r2);
+            
+            // X
             if (d2 == 0 && r1 == r2) {
-                System.out.println(-1); 
-            } else if (d2 > sumR2 || d2 < diffR2) {
-                System.out.println(0); 
-            } else if (d2 == sumR2 || d2 == diffR2) {
-                System.out.println(1); 
-            } else {
-                System.out.println(2); 
+                sb.append(-1).append('\n');
+                continue;
             }
+            // 만나지 않음 
+            if (d2 > sumR * sumR || d2 < diffR * diffR) {
+                sb.append(0).append('\n');
+                continue;
+            }
+            // 한 점에서 접함 
+            if (d2 == sumR * sumR || d2 == diffR * diffR) {
+                sb.append(1).append('\n');
+                continue;
+            }
+            // 두 점에서 만남
+            sb.append(2).append('\n');
         }
+
+        System.out.print(sb);
     }
 }
